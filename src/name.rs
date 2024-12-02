@@ -6,7 +6,7 @@
 use crate::events::attributes::Attribute;
 use crate::events::BytesStart;
 use crate::utils::write_byte_string;
-use memchr::memchr;
+//use memchr::memchr;
 use std::fmt::{self, Debug, Formatter};
 
 /// Some namespace was invalid
@@ -165,7 +165,7 @@ impl<'a> QName<'a> {
         if self.0.starts_with(b"xmlns") {
             return match self.0.get(5) {
                 None => Some(PrefixDeclaration::Default),
-                Some(&b':') => Some(PrefixDeclaration::Named(&self.0[6..])),
+               // Some(&b':') => Some(PrefixDeclaration::Named(&self.0[6..])),
                 _ => None,
             };
         }
@@ -175,7 +175,8 @@ impl<'a> QName<'a> {
     /// Returns the index in the name where prefix ended
     #[inline(always)]
     fn index(&self) -> Option<usize> {
-        memchr(b':', self.0)
+        //memchr(b':', self.0)
+			None
     }
 }
 impl<'a> Debug for QName<'a> {
